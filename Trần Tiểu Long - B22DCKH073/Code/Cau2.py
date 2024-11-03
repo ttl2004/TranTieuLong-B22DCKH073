@@ -33,13 +33,15 @@ def get_statistics(df, columns_to_analyze):
     std_all = df[columns_to_analyze].std().round(2)
     
     # Tạo một DataFrame chứa các giá trị này cho toàn giải
-    overall_df = pd.DataFrame({
+    overall_data = {
         'STT': [0],
-        'Team': ['all'],
-        **{f'Median of {col}': [median_all[col]] for col in columns_to_analyze},
-        **{f'Mean of {col}': [mean_all[col]] for col in columns_to_analyze},
-        **{f'Std of {col}': [std_all[col]] for col in columns_to_analyze}
-    })
+        'Team': ['all']
+    }
+    for col in columns_to_analyze:
+        overall_data[f'Median of {col}'] = [median_all[col]]
+        overall_data[f'Mean of {col}'] = [mean_all[col]]
+        overall_data[f'Std of {col}'] = [std_all[col]]
+    overall_df = pd.DataFrame(overall_data)
 
     # Tính trung vị, trung bình và độ lệch chuẩn cho từng đội và làm tròn đến 2 chữ số sau dấu phẩy
     median_team = df.groupby('Team')[columns_to_analyze].median().round(2)
@@ -47,13 +49,15 @@ def get_statistics(df, columns_to_analyze):
     std_team = df.groupby('Team')[columns_to_analyze].std().round(2)
 
     # Tạo một DataFrame chứa các giá trị này cho từng đội
-    team_df = pd.DataFrame({
+    team_data = {
         'STT': range(1, len(median_team) + 1),
-        'Team': median_team.index,
-        **{f'Median of {col}': median_team[col].values for col in columns_to_analyze},
-        **{f'Mean of {col}': mean_team[col].values for col in columns_to_analyze},
-        **{f'Std of {col}': std_team[col].values for col in columns_to_analyze}
-    })
+        'Team': median_team.index
+    }
+    for col in columns_to_analyze:
+        team_data[f'Median of {col}'] = median_team[col].values
+        team_data[f'Mean of {col}'] = mean_team[col].values
+        team_data[f'Std of {col}'] = std_team[col].values
+    team_df = pd.DataFrame(team_data)
 
     # Gộp hai DataFrame lại thành một
     final_df = pd.concat([overall_df, team_df], ignore_index=True)
