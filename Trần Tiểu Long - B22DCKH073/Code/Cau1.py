@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import sys
 import pandas as pd
 import time
-import csv
 # Thiết lập mã hóa UTF-8 cho đầu ra
 sys.stdout.reconfigure(encoding='utf-8')
 

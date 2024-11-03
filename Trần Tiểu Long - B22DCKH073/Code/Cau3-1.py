@@ -4,7 +4,6 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def plot_kmeans(data, centroids, clusters, step):
@@ -47,7 +46,7 @@ if __name__ == "__main__":
 
     # K-means
     # Số lượng cụm
-    k = 5
+    k = 3
 
     # Khởi tạo ngẫu nhiên các tâm cụm
     centroids = data.sample(n=k).values

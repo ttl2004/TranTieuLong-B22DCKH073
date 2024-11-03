@@ -1,9 +1,7 @@
 import pandas as pd
-import numpy as np
 from tabulate import tabulate
 import matplotlib.pyplot as plt
 import seaborn as sns
-from tabulate import tabulate
 from collections import Counter
 import os
 import time
@@ -126,7 +124,7 @@ def get_best_team(df, columns_to_analyze):
     columns_to_analyze = df.columns[8:]  # Chỉ chọn các cột chỉ số từ cột "Non-Penalty Goals" trở đi
     df[columns_to_analyze] = df[columns_to_analyze].apply(pd.to_numeric, errors='coerce')
 
-   # Nhóm theo 'Tên Đội' và tính tổng các chỉ số
+   # Nhóm theo 'Tên Đội' và tính trung bình các chỉ số
     team_summary = df.groupby('Team')[columns_to_analyze].mean()
 
     # Tạo một danh sách để chứa kết quả
@@ -161,7 +159,7 @@ def get_best_team(df, columns_to_analyze):
 if __name__ == "__main__":
     df = pd.read_csv("results.csv")
 
-    columns_to_analyze = df.columns[4:]  # Chỉ chọn các cột chỉ số từ cột "Non-Penalty Goals" trở đi
+    columns_to_analyze = df.columns[4:]  # Chỉ chọn các cột chỉ số từ cột "Age" trở đi
 
     # Chuyển đổi kiểu dữ liệu, với các giá trị không phải số (như 'N/a') chuyển thành NaN
     df[columns_to_analyze] = df[columns_to_analyze].apply(pd.to_numeric, errors='coerce')
@@ -185,6 +183,7 @@ if __name__ == "__main__":
         elif choice == 4:
             get_best_team(df, columns_to_analyze)
         else:
+            print("Đã thoát chương trình!")
             break
     
 

@@ -19,7 +19,7 @@ def plot_radar_chart(data, player1, player2, attributes):
     p2_data = np.concatenate((p2_data, [p2_data[0]]))
     angles += angles[:1]
 
-    fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
+    fig, ax = plt.subplots(figsize=(6, 8), subplot_kw=dict(polar=True))
 
     # Vẽ biểu đồ radar cho từng cầu thủ
     ax.plot(angles, p1_data, color='blue', linewidth = 2, linestyle='solid', label=player1)
@@ -55,7 +55,7 @@ def main():
     player2 = args.p2
     attributes = args.Attribute.split(',')
 
-
+    # Chuyển các cột dữ liệu về dạng số
     for attr in attributes:
         data[attr] = pd.to_numeric(data[attr], errors='coerce')
 
@@ -65,4 +65,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python 3.py --p1 "Aaron Cresswell" --p2 "Aaron Wan-Bissaka" --Attribute "Age,Matches Played,Starts,Minutes,Non-Penalty Goals,Penalties Made,Assists,Yellow Cards,Red Cards"
