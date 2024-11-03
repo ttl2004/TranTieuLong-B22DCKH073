@@ -22,7 +22,7 @@ for k in range(2, 11):
     score = silhouette_score(data_scaled, cluster_labels) # Tính chỉ số silhouette
     silhouette_scores.append(score)
 
-# Plotting Silhouette Score for each K
+# Vẽ biểu đồ Silhouette Score cho từng giá trị K
 plt.figure(figsize=(10, 6))
 plt.plot(range(2, 11), silhouette_scores, marker='o', linestyle='-')
 plt.xlabel('Số lượng cụm (K)')
